@@ -1,0 +1,4 @@
+//const title = //ol[@class='ui-search-layout ui-search-layout--stack']/li[1]/div/div/div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-item__group ui-search-item__group--title"]
+//   const currency = //ol[@class='ui-search-layout ui-search-layout--stack']/li[1]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-symbol"]
+//   const ammount = //ol[@class='ui-search-layout ui-search-layout--stack']/li[1]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-fraction"]
+//  const cents = //ol[@class='ui-search-layout ui-search-layout--stack']/li[1]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-cents"]
