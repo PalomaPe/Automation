@@ -8,7 +8,9 @@ class Framework {
   }
   convertToJSON(data) {
     let jsonData = JSON.stringify(data);
-    return jsonData;
+    let slash = jsonData.replace(/\\/g, "");
+    console.log(slash);
+    return slash;
   }
 
   loadInfoIntoAFile(dataCamisasInJSON) {

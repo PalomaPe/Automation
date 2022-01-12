@@ -17,7 +17,7 @@ describe("Mercado Libre", () => {
     result.detailsOfCamisetas = [];
     for (let index = 0; index < 3; index++) {
       for (let index = 1; index < 56; index++) {
-        let currentProduct = [];
+        let currentProduct = {};
         let productName = $(
           `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[ ` +
             index +
@@ -44,11 +44,9 @@ describe("Mercado Libre", () => {
         ).getText();
         currentProduct.price = productPrice;
         result.detailsOfCamisetas.push(currentProduct);
-        console.log(result);
       }
       CamisetasPage.siguienteBtn.click();
     }
-    const jsonResult = HandleDataMethods.convertToJSON(result);
-    handleDataMethods.loadInfoIntoAFile(jsonResult);
+    handleDataMethods.loadInfoIntoAFile(result);
   });
 });
