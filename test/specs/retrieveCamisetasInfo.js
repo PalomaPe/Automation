@@ -15,7 +15,7 @@ describe("Mercado Libre", () => {
     EntryPage.searchBtn.click();
     let result = {};
     result.detailsOfCamisetas = [];
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < 3; index++) {
       for (let index = 1; index < 56; index++) {
         let currentProduct = [];
         let productName = $(
