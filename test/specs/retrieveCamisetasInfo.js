@@ -1,6 +1,6 @@
 import EntryPage from "../pageobjects/mainPage.js";
 import CamisetasPage from "../pageobjects/camisetasPage.js";
-import handleDataMethods from "../frameworks/handleDataMethods.js";
+import HandleDataMethods from "../frameworks/handleDataMethods.js";
 
 let cookieAcceptanceButtonsSelector = "#newCookieDisclaimerButton";
 
@@ -16,36 +16,16 @@ describe("Mercado Libre", () => {
     result.detailsOfCamisetas = [];
     for (let index = 0; index < 3; index++) {
       for (let index = 1; index < 56; index++) {
+        global.index = index;
         let currentProduct = {};
-        let productName = $(
-          `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[ ` +
-            index +
-            `]/div/div/div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-item__group ui-search-item__group--title"]/a/h2`
-        );
-        productName.waitForClickable();
-        currentProduct.name = productName.getText();
-        let productLink = $(
-          `//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-            index +
-            `]/div/div/div[@class='ui-search-result__content-wrapper']//a`
-        ).getAttribute("href");
-        currentProduct.link = productLink;
-        let productCurrency = $(
-          `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-            index +
-            `]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-symbol"]`
-        ).getText();
-        currentProduct.currency = productCurrency;
-        let productPrice = $(
-          `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-            index +
-            `]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-fraction"]`
-        ).getText();
-        currentProduct.price = productPrice;
+        HandleDataMethods.retrieveProductName(currentProduct);
+        HandleDataMethods.retrieveProductLink(currentProduct);
+        HandleDataMethods.retireveProductCurrency(currentProduct);
+        HandleDataMethods.retrieveProductPrice(currentProduct);
         result.detailsOfCamisetas.push(currentProduct);
       }
       CamisetasPage.siguienteBtn.click();
     }
-    handleDataMethods.loadInfoIntoAFile(result);
+    HandleDataMethods.loadInfoIntoAFile(result);
   });
 });
