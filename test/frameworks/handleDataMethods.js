@@ -1,29 +1,20 @@
 import fs from "fs";
 
 class Framework {
-  retrieveDetailsAboutProduct(feature) {
-    if (feature.isExisting()) {
-      currentProduct.name = feature.getText();
-    }
-  }
-  convertToJSON(data) {
-    let jsonData = JSON.stringify(data);
-    let slash = jsonData.replace(/\\/g, "");
-    console.log(slash);
-    return slash;
-  }
-
   loadInfoIntoAFile(dataCamisasInJSON) {
-    let json = JSON.stringify(dataCamisasInJSON);
+    let jsonCamisetas = JSON.stringify(dataCamisasInJSON);
+    let filename = "detailsOfCamisetas.json";
     fs.writeFile(
-      "detailsOfCamisetas.json",
-      json,
+      filename,
+      jsonCamisetas,
       {
         flags: "a",
       },
       (err) => {
         if (err) throw err;
-        console.log("A file with the results has been created");
+        console.log(
+          `A file with the results named ${filename} has been created`
+        );
       }
     );
   }

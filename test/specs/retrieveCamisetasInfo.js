@@ -1,6 +1,5 @@
 import EntryPage from "../pageobjects/mainPage.js";
 import CamisetasPage from "../pageobjects/camisetasPage.js";
-import HandleDataMethods from "../frameworks/handleDataMethods.js";
 import handleDataMethods from "../frameworks/handleDataMethods.js";
 
 let cookieAcceptanceButtonsSelector = "#newCookieDisclaimerButton";
