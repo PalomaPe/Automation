@@ -1,4 +1,5 @@
 import Page from "./page.js";
+import Selectors from "../selectors/selectorsMercadoLibre.js";
 
 class camisetasPage extends Page {
   get numberOfPages() {
@@ -8,7 +9,7 @@ class camisetasPage extends Page {
   }
 
   get siguienteBtn() {
-    return $(".andes-pagination__arrow-title");
+    return $(Selectors.siguienteBtn);
   }
 }
 

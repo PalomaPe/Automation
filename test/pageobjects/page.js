@@ -2,46 +2,24 @@
  * main page object containing all methods, selectors and functionality
  * that is shared across all page objects
  */
-/* module.exports = class Page {
-  /**
-   * Opens a sub page of the page
-   * @param path path of the sub page (e.g. /path/to/page.html)
-   */
-/* open(path) {
-    return browser.url(`https://the-internet.herokuapp.com/${path}`);
-  }
 
-  get searchBoxInput() {
-    $(".nav-search-input");
-  }
-
-  searchProduct() {
-    this.searchBoxInput.setValue("camisetas");
-  }
-};
-*/
-/*
-export default class Page {
-    constructor() {
-        this.title = 'My Page'
-    }
-
-    async open (path) {
-        await browser.url(path)
-    }
-}*/
+import Selectors from "../selectors/selectorsMercadoLibre.js";
 
 class page {
+  open(path) {
+    browser.url(path);
+    browser.maximizeWindow();
+  }
   get searchBoxInput() {
-    return $(".nav-search-input");
+    return $(Selectors.searchBox);
   }
 
   get searchBtn() {
-    return $(".nav-search-btn");
+    return $(Selectors.searchBtn);
   }
 
-  searchProduct() {
-    this.searchBoxInput.setValue("camisetas");
+  searchProduct(product) {
+    this.searchBoxInput.setValue(product);
   }
 }
 

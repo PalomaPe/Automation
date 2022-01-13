@@ -1,30 +1,33 @@
 import EntryPage from "../pageobjects/mainPage.js";
 import CamisetasPage from "../pageobjects/camisetasPage.js";
 import HandleDataMethods from "../frameworks/handleDataMethods.js";
-
-let cookieAcceptanceButtonsSelector = "#newCookieDisclaimerButton";
+import Selectors from "../selectors/selectorsMercadoLibre.js";
 
 describe("Mercado Libre", () => {
   it("Camisetas information", () => {
-    browser.url("https://www.mercadolibre.com.uy/");
-    browser.maximizeWindow();
-    $(cookieAcceptanceButtonsSelector).waitForClickable();
-    $(cookieAcceptanceButtonsSelector).click();
-    EntryPage.searchProduct();
+    EntryPage.open("https://www.mercadolibre.com.uy/");
+    $(Selectors.cookieAcceptanceButton).waitForClickable();
+    $(Selectors.cookieAcceptanceButton).click();
+    EntryPage.searchProduct("camisetas");
     EntryPage.searchBtn.click();
     let result = {};
     result.detailsOfCamisetas = [];
-    for (let index = 0; index < 3; index++) {
-      for (let index = 1; index < 56; index++) {
-        global.index = index;
+    let listIndex = 1;
+    let pageIndex = 1;
+    while (pageIndex < 4 && pageIndex <= CamisetasPage.numberOfPages) {
+      while (HandleDataMethods.productExists(listIndex)) {
         let currentProduct = {};
-        HandleDataMethods.retrieveProductName(currentProduct);
-        HandleDataMethods.retrieveProductLink(currentProduct);
-        HandleDataMethods.retireveProductCurrency(currentProduct);
-        HandleDataMethods.retrieveProductPrice(currentProduct);
+        HandleDataMethods.retrieveProductName(currentProduct, listIndex);
+        HandleDataMethods.retrieveProductLink(currentProduct, listIndex);
+        HandleDataMethods.retireveProductCurrency(currentProduct, listIndex);
+        HandleDataMethods.retrieveProductPrice(currentProduct, listIndex);
         result.detailsOfCamisetas.push(currentProduct);
+        listIndex++;
       }
+      CamisetasPage.siguienteBtn.waitForClickable();
       CamisetasPage.siguienteBtn.click();
+      listIndex = 1;
+      pageIndex++;
     }
     HandleDataMethods.loadInfoIntoAFile(result);
   });

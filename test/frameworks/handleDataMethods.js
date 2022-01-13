@@ -1,4 +1,5 @@
 import fs from "fs";
+import Selectors from "../selectors/selectorsMercadoLibre.js";
 
 class Framework {
   loadInfoIntoAFile(dataCamisasInJSON) {
@@ -19,49 +20,53 @@ class Framework {
     );
   }
 
-  retrieveProductName(arrayToStore) {
-    let productName = $(
-      `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[ ` +
-        index +
-        `]/div/div/div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-item__group ui-search-item__group--title"]/a/h2`
-    );
-    if (productName.isExisting) {
-      productName.waitForClickable();
+  retrieveProductName(arrayToStore, listIndex) {
+    let productNameSelector = Selectors.productName.replace("index", listIndex);
+    let productName = $(productNameSelector);
+    if (productName.isExisting()) {
       arrayToStore.name = productName.getText();
     }
   }
 
-  retrieveProductLink(arrayToStore) {
+  retrieveProductLink(arrayToStore, listIndex) {
     let productLink = $(
-      `//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-        index +
-        `]/div/div/div[@class='ui-search-result__content-wrapper']//a`
+      Selectors.productLink.replace("index", listIndex.toString())
     );
     if (productLink.isExisting()) {
+      productLink.waitForClickable();
       arrayToStore.link = productLink.getAttribute("href");
     }
   }
 
-  retireveProductCurrency(arrayToStore) {
-    let productCurrency = $(
-      `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-        index +
-        `]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-symbol"]`
+  retireveProductCurrency(arrayToStore, listIndex) {
+    let productCurrencySelector = Selectors.productCurrency.replace(
+      "index",
+      listIndex.toString()
     );
+    let productCurrency = $(productCurrencySelector);
     if (productCurrency.isExisting()) {
       arrayToStore.currency = productCurrency.getText();
     }
   }
 
-  retrieveProductPrice(arrayToStore) {
-    let productPrice = $(
-      `.//ol[@class='ui-search-layout ui-search-layout--stack']/li[` +
-        index +
-        `]//div[@class='ui-search-result__content-wrapper']/div[@class="ui-search-result__content-columns"]//span[@class="price-tag-fraction"]`
+  retrieveProductPrice(arrayToStore, listIndex) {
+    let productPriceSelector = Selectors.productPrice.replace(
+      "index",
+      listIndex.toString()
     );
+    let productPrice = $(productPriceSelector);
     if (productPrice.isExisting()) {
       arrayToStore.price = productPrice.getText();
     }
+  }
+
+  productExists(listIndex) {
+    let productSelector = Selectors.productName.replace(
+      "index",
+      listIndex.toString()
+    );
+    let exists = $(productSelector).isExisting();
+    return exists;
   }
 }
 
